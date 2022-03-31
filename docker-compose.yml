@@ -1,0 +1,20 @@
+version: '3'
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:17.0.1
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin123
+      KEYCLOAK_LOGLEVEL: INFO
+      ROOT_LOGLEVEL: INFO
+      KEYCLOAK_THEME_RESOURCE_VERSION: foobar3
+    volumes:
+      - ./data/:/opt/keycloak/data/
+      - ./target/keycloak-environment-resource-version.jar:/opt/keycloak/providers/keycloak-environment-resource-version.jar
+    ports:
+      - "8080:8080"
+      - "8787:8787"
+    command:
+      - start-dev
+      - --features admin-fine-grained-authz
+
