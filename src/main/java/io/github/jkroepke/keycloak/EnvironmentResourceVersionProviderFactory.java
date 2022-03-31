@@ -28,23 +28,18 @@ public class EnvironmentResourceVersionProviderFactory implements RealmResourceP
 
     @Override
     public void init(Config.Scope scope) {
-        setResourceVersion();
     }
 
     @Override
     public void postInit(KeycloakSessionFactory keycloakSessionFactory) {
-        setResourceVersion();
-    }
-
-    @Override
-    public void close() {
-    }
-
-    private void setResourceVersion() {
         String resourceVersion = System.getenv(KEYCLOAK_THEME_RESOURCE_VERSION);
 
         if (resourceVersion != null) {
             Version.RESOURCES_VERSION = resourceVersion;
         }
+    }
+
+    @Override
+    public void close() {
     }
 }
